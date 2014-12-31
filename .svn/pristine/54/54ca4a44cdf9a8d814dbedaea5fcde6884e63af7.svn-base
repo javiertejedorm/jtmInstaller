@@ -1,0 +1,23 @@
+package com.jtmproject.gui;
+
+import javax.swing.JProgressBar;
+
+/**
+ * This class contains a static JPrograssBar for access it since different class
+ * @author Javier Tejedor
+ */
+public class BarInstall extends JProgressBar{
+
+	private static BarInstall barInstall;
+
+	/**
+	 * returns an object of this class (Singleton Class)
+	 * @return
+	 */
+	public static BarInstall getBarInstall() {
+		if(barInstall == null){
+			barInstall = new BarInstall();
+		}
+		return barInstall;
+	}
+}

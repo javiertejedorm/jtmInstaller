@@ -1,0 +1,40 @@
+package com.jtmproject.gui;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class JLabelAnimation implements Runnable{
+
+	private JFrame jFrame;
+	private JLabel jLabel;
+	private int locationY;
+	private int locationX;
+	private boolean left;
+	
+	public JLabelAnimation(JFrame jFrame, JLabel jLabel, int locationX, int locationY, boolean left){
+		this.jFrame = jFrame;
+		this.jLabel = jLabel;
+		this.locationX = locationX;
+		this.locationY = locationY;
+		this.left = left;
+	}
+
+
+	@Override
+	public void run() {
+		for(int i = 0; i < SizesGUI.JLABEL_ANIMATION_MOVEMENT; i++){
+			if(left){
+				jLabel.setLocation(locationX - i, locationY);
+			}else{
+				jLabel.setLocation(locationX + i, locationY);
+			}
+			jLabel.repaint();
+			
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

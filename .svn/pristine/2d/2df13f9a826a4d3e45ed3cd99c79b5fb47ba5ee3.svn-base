@@ -1,0 +1,84 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.2.2
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 16-08-2013 a las 15:43:22
+-- Versión del servidor: 5.5.27
+-- Versión de PHP: 5.4.7
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `oneclick`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `favoritos`
+--
+
+CREATE TABLE IF NOT EXISTS `favorites` (
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `idjtm` int(11) NOT NULL,
+  PRIMARY KEY (`email`,`idjtm`),
+  KEY `idjtm` (`idjtm`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `jtm`
+--
+
+CREATE TABLE IF NOT EXISTS `jtm` (
+  `idjtm` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `size` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(2500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url_jtm` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `author` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `localization` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `developer` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `official_url` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_code` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `technical_support_telephone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `technical_support_url` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `version` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`idjtm`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `super` tinyint(1) NOT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Restricciones para tablas volcadas
+--
+ALTER TABLE `favorites` ADD FOREIGN KEY ( `email`) REFERENCES  `users` (
+`email`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE  `favorites` ADD FOREIGN KEY (  `idjtm` ) REFERENCES  `jtm` (
+`idjtm`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+

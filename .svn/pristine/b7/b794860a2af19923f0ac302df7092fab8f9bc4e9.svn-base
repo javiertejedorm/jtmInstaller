@@ -1,0 +1,20 @@
+package com.jtmproject.gui;
+
+import javax.swing.JLabel;
+
+public class JLabelUrlOfficial extends JLabel{
+
+	private static JLabel jLabel;
+	
+	/**
+	 * returns a static JLabel
+	 * @return
+	 */
+	public static JLabel getjLabel(){
+		if(jLabel == null){
+			jLabel = new JLabel();		
+		}
+		return jLabel;
+	}
+	
+}

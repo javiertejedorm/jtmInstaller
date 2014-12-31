@@ -1,0 +1,74 @@
+package com.jtmproject.actions;
+
+import com.jtmproject.task.Program;
+import com.jtmproject.user.MessagesUser;
+
+/**
+ * This class compiles data about the program for showing to the user
+ * @author Javier Tejedor
+ */
+public class ListAllData {
+
+	/**
+	 * return all data
+	 * @return
+	 */
+	public String getAllData(Program program) {
+		
+		String result = "";
+		result += getDataProject(program) + "\n";
+		result += getOperatingSystemAndDefaultFolder(program) + "\n";
+		result += getMetadata(program);
+
+		return result;
+	}
+	
+	/**
+	 * returns the metadata of the project
+	 * @param program
+	 * @return
+	 */
+	private String getMetadata(Program program){
+		String data = "";
+		data += MessagesUser.getMU().getAuthor() + ": " + program.getTagMetadata().getAuthor() + "\n";
+		data += MessagesUser.getMU().getLocalization() + ": " + program.getTagMetadata().getLocalization() + "\n";
+		data += MessagesUser.getMU().getDescription() + ": " + program.getTagMetadata().getDescription() + "\n";
+		data += MessagesUser.getMU().getDeveloper() + ": " + program.getTagMetadata().getDeveloper() + "\n";
+		data += MessagesUser.getMU().getProductCode() + ": " + program.getTagMetadata().getProductCode() + "\n";
+		data += MessagesUser.getMU().getProductName() + ": " + program.getTagMetadata().getProductName() + "\n";
+		data += MessagesUser.getMU().getTechnicalSupportTelephone() + ": " + program.getTagMetadata().getTechnicalSupportTelephone() + "\n";
+		data += MessagesUser.getMU().getTechnicalSupportUrl() + ": " + program.getTagMetadata().getTechnicalSupportUrl() + "\n";
+		data += MessagesUser.getMU().getVersion() + ": " + program.getTagMetadata().getVersion() + "\n";
+		return data;
+	}
+	
+	/**
+	 * returns the name of the proggram
+	 * @param program
+	 * @return
+	 */
+	private String getDataProject(Program program){
+		String data = "";
+		data += MessagesUser.getMU().getNameOfTheProgram() + ": " + program.getTagProject().getName() + "\n";
+		data += MessagesUser.getMU().getSizeAfterInstall() + ": " + StringUtils.convertSizeFile(program.getTagProject().getSize()) + "\n";
+		data += MessagesUser.getMU().getTotalFiles() + ": " + program.getTagProject().getTotalFiles() + "\n";
+		data += MessagesUser.getMU().getUrlDownloadFile() + ": " + program.getTagProject().getUrl();
+		return data;
+	}
+	
+	/**
+	 * returns the operating system supported and his default folder to install 
+	 * @param program
+	 * @return
+	 */
+	private String getOperatingSystemAndDefaultFolder(Program program){
+		String data = "";
+		int size = program.getListTagOperatingSystem().size();
+		for(int i = 0 ; i < size; i++){
+			data += MessagesUser.getMU().getOsSupported() + ": " + program.getListTagOperatingSystem().get(i).getNameOfOperatingSystem() +
+					"(" + GetPathsOS.getLetterWindows() + program.getListTagOperatingSystem().get(i).getRootDirectoryInstall() +
+					"\\" +program.getListTagOperatingSystem().get(i).getFolder() + ")" + "\n";
+		}
+		return data;
+	}
+}
