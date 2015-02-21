@@ -20,7 +20,7 @@ public class LoginUser{
 	 * this returns an instance of LoginUser. (Singleton Class)
 	 * @return
 	 */
-	private static LoginUser getLu(){
+	public static LoginUser getLu(){
 		if(lu == null){
 			lu = new LoginUser();
 		}
